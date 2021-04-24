@@ -1,0 +1,37 @@
+.ItemProgress{
+    display: flex;
+    align-items: center;
+}
+
+.percent {
+    color: #00b8d4;
+}
+
+.TaskProgressBar {
+    background-color: #84ffff;
+    min-width: 90%;
+    min-height: 2rem;
+    margin-left: 2%;
+    border-radius: 15px;
+    text-align: center;
+}
+  
+.TaskProgress {
+    background-color: #00e5ff;
+    min-height: 2rem;
+    margin: 0;
+    border-radius: 15px;
+    text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    .TaskProgressBar {
+        background-color: rgb(183, 155, 229);
+    }
+    .TaskProgress {
+        background-color: rgba(103, 58, 183, 1);
+    }
+    .percent {
+        color: blueviolet;
+    }
+}

@@ -1,0 +1,40 @@
+.divTasks {
+    border-radius: 1rem;
+    border: 1px solid #0085ff;
+    height: 44vh;
+    overflow: scroll;
+}
+.headerCus {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.9rem;
+    background-color: #0085ff;
+}
+
+.sticky {
+    position: fixed;
+    width: 87.4%;
+}
+
+.tasksdiv {
+    padding-top: 4.5%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 1%;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .divTasks {
+        border-color:  #26A69A;
+    }
+    .headerCus {
+        background-color: #26A69A;
+    }
+}

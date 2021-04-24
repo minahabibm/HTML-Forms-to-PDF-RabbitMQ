@@ -1,0 +1,29 @@
+.itemDiv {
+    margin-left: 2%;
+    margin-right: 2%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+.itemtitle {
+   margin-top: 0;
+}
+
+.itemSep {
+    margin: 0;
+}
+
+.buttonTasks{
+    font-size: 10px;
+    padding: 6px 16px;
+    margin-bottom: 0;
+    background-color: #0085ff;
+    border-color: #0085ff;
+}
+
+@media (prefers-color-scheme: dark) {
+    .buttonTasks {
+        background-color: #26A69A;
+        border-color: #26A69A;  
+    }
+}

@@ -1,0 +1,17 @@
+.input {
+    display: inline-block;
+    /* border: 1px solid blue;  */
+    /* vertical-align: top; */
+}
+
+.fileUpload {
+    display: inline-block;
+    /* border: 1px dashed; */
+    vertical-align: top;
+    width: 550px;
+    height: 250px;
+}
+
+.fileName {
+    margin-left: 1%;
+}
