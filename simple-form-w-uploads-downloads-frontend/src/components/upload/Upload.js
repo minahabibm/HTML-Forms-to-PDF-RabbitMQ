@@ -43,6 +43,11 @@ const Upload = (props) => {
                 <button 
                     className="buttonUpload"
                     onClick={() => {
+                        (successfullUploaded &&  
+                            axios.delete(`http://localhost:8080/upload/${files[0].name}`)
+                                .then(res => console.log(res))
+                                .catch(err => console.log(err))
+                        );
                         setFiles([])
                         setUploadProgress({})
                         setBusy(false)
@@ -104,7 +109,7 @@ const Upload = (props) => {
                 }
             };
 
-            axios.post('http://localhost:5000/upload', data, config)
+            axios.post('http://localhost:8080/upload', data, config)
             .then(function (res) {
                 setUploadProgress(prevState => ({
                     ...prevState,
@@ -138,7 +143,7 @@ const Upload = (props) => {
             });
         });
     }
-
+    
     return (
       <div className="Upload">
 

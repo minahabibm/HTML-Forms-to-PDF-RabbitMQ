@@ -1,0 +1,28 @@
+package com.example.simpleformstopdf;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+
+import com.example.simpleformstopdf.uploadfiles.storage.StorageProperties;
+import com.example.simpleformstopdf.uploadfiles.storage.StorageService;
+
+@SpringBootApplication
+@EnableConfigurationProperties(StorageProperties.class)
+public class SimpleformstopdfApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SimpleformstopdfApplication.class, args);
+    }
+
+    @Bean
+    CommandLineRunner init(StorageService storageService) {
+        return (args) -> {
+            storageService.deleteAll();
+            storageService.init();
+        };
+    }
+
+}
