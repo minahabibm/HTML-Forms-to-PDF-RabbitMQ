@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import com.example.simpleformstopdf.uploadfiles.storage.StorageProperties;
-import com.example.simpleformstopdf.uploadfiles.storage.StorageService;
+import com.example.simpleformstopdf.storage.StorageProperties;
+import com.example.simpleformstopdf.storage.StorageService;
 
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)

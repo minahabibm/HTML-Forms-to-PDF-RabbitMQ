@@ -1,4 +1,4 @@
-package com.example.simpleformstopdf.uploadfiles.storage;
+package com.example.simpleformstopdf.storage;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,22 +21,37 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileSystemStorageService implements StorageService {
 
     private final Path rootLocation;
+    private final Path uploadLocation;
+    private final Path pdfLocation ;
+    private final Path tasksLocation ;
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
         this.rootLocation = Paths.get(properties.getLocation());
+        this.uploadLocation = Paths.get(properties.getUploadLocation());
+        this.pdfLocation = Paths.get(properties.getPdfLocation());
+        this.tasksLocation = Paths.get(properties.getTasksLocation());
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public void store(MultipartFile file, String dir) {
+        
+        Path location = null;
+        if (dir == "upload") {
+            location = this.uploadLocation;
+        } else if (dir == "pdf") {
+            location = this.pdfLocation;
+        }
+        
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
             }
-            Path destinationFile = this.rootLocation.resolve(
+
+            Path destinationFile = location.resolve(
                     Paths.get(Objects.requireNonNull(file.getOriginalFilename())))
                     .normalize().toAbsolutePath();
-            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
+            if (!destinationFile.getParent().equals(location.toAbsolutePath())) {
                 // This is a security check
                 throw new StorageException( "Cannot store file outside current directory.");
             }
@@ -64,14 +79,22 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public Path load(String filename) {
-        return rootLocation.resolve(filename);
+    public Path load(String filename, String dir) {
+        
+        Path location = null;
+        if (dir == "upload") {
+            location = this.uploadLocation;
+        } else if (dir == "pdf") {
+            location = this.pdfLocation;
+        }
+        
+        return location.resolve(filename);
     }
 
     @Override
-    public Resource loadAsResource(String filename) {
+    public Resource loadAsResource(String filename, String dir) {
         try {
-            Path file = load(filename);
+            Path file = load(filename , dir);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
@@ -87,8 +110,8 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void delete(String filename) {
-        Path file = load(filename);
+    public void delete(String filename, String dir) {
+        Path file = load(filename, dir );
         try {
             Files.delete(file);
         } catch (IOException e) {
@@ -105,6 +128,9 @@ public class FileSystemStorageService implements StorageService {
     public void init() {
         try {
             Files.createDirectories(rootLocation);
+            Files.createDirectories(uploadLocation);
+            Files.createDirectories(pdfLocation);
+            Files.createFile(tasksLocation);
         }
         catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);

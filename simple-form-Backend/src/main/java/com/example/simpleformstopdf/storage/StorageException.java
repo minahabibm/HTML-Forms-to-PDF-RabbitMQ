@@ -1,4 +1,4 @@
-package com.example.simpleformstopdf.uploadfiles.storage;
+package com.example.simpleformstopdf.storage;
 
 public class StorageException extends RuntimeException {
 

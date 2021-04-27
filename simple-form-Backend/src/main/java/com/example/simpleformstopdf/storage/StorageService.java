@@ -1,4 +1,4 @@
-package com.example.simpleformstopdf.uploadfiles.storage;
+package com.example.simpleformstopdf.storage;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,15 +10,15 @@ public interface StorageService {
 
     void init();
 
-    void store(MultipartFile file);
+    void store(MultipartFile file, String dir);
 
     Stream<Path> loadAll();
 
-    Path load(String filename);
+    Path load(String filename, String dir);
 
-    Resource loadAsResource(String filename);
+    Resource loadAsResource(String filename, String dir);
 
-    void delete(String filename);
+    void delete(String filename, String dir);
 
     void deleteAll();
 }

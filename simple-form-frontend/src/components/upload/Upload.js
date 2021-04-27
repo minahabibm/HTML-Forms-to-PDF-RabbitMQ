@@ -45,7 +45,7 @@ const Upload = (props) => {
                     onClick={() => {
                         (successfullUploaded &&  
                             axios.delete(`http://localhost:8080/upload/${files[0].name}`)
-                                .then(res => console.log(res))
+                                .then()
                                 .catch(err => console.log(err))
                         );
                         setFiles([])
@@ -115,9 +115,8 @@ const Upload = (props) => {
                     ...prevState,
                     [file.name]: {state: "done", percentage: 100}
                 }));
-                console.log(res);
                 props.callbackFromUpload({
-                    "name": "image", 
+                    "name": res.data.filename, 
                     "URL": "image URL"
                 })
                 resolve(res);

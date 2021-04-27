@@ -17,6 +17,7 @@ const Dropzone = (props) => {
           const array = fileListToArray(files);
           props.onFilesAdded(array);
         }
+        fileInputRef.current.value = null; // to allow adding the same file again
     }
 
     const fileListToArray = (list) => {
