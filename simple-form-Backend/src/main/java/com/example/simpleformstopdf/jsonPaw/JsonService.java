@@ -1,12 +1,15 @@
 package com.example.simpleformstopdf.jsonPaw;
 
+import java.io.IOException;
+
 public interface JsonService {
 
-    void init();
 
-    void addPdfToFile();
+    void loadAll() throws IOException;
 
-    void loadAll();
+    void addToFile() throws IOException;
+
+    void addPdfToFile(String taskName, int taskProgress, boolean taskIsReady, String taskUrl ) throws IOException;
 
     void getName(String Uid);
 
@@ -22,6 +25,8 @@ public interface JsonService {
 
     void setDownloadPdf(String Uid);
 
-    void deleteFromFile(String Uid);
+    void deleteFromFile(String Uid) throws IOException;
+
+    void init();
 
 }
