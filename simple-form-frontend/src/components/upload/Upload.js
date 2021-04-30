@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import './Upload.css';
@@ -142,10 +142,18 @@ const Upload = (props) => {
             });
         });
     }
+
+    useEffect(() => {
+        setFiles([])
+        setUploadProgress({})
+        setBusy(false)
+        setSuccessfullUploaded(false)
+        setUploading(false);
+    },[props.fileStatus])
     
     return (
       <div className="Upload">
-
+          
         <div className="Content">
             <div>
                 <DropZone 

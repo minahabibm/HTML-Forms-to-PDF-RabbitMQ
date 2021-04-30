@@ -8,14 +8,15 @@ const Progress = (props) => {
       <div className="TaskProgressBar">
         <div
           className="TaskProgress"
-          style={{ width: "50%"}} //props.progress + '%' }}
+          style={{ width: props.progress + '%' }}
         >
             {props.name}
         </div>
       </div>
-        <span className="percent">100%</span>
+        <span className="percent"> {props.progress} % </span>
     </div>
     );
+
 };
 
 export default Progress

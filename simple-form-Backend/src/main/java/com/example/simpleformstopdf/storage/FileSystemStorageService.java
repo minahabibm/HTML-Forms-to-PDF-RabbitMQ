@@ -37,9 +37,9 @@ public class FileSystemStorageService implements StorageService {
     public void store(MultipartFile file, String dir) {
         
         Path location = null;
-        if (dir == "upload") {
+        if (dir.equals("upload")) {
             location = this.uploadLocation;
-        } else if (dir == "pdf") {
+        } else if (dir.equals("pdf")) {
             location = this.pdfLocation;
         }
         
@@ -48,6 +48,7 @@ public class FileSystemStorageService implements StorageService {
                 throw new StorageException("Failed to store empty file.");
             }
 
+            assert location != null;
             Path destinationFile = location.resolve(
                     Paths.get(Objects.requireNonNull(file.getOriginalFilename())))
                     .normalize().toAbsolutePath();
@@ -82,12 +83,13 @@ public class FileSystemStorageService implements StorageService {
     public Path load(String filename, String dir) {
         
         Path location = null;
-        if (dir == "upload") {
+        if (dir.equals("upload")) {
             location = this.uploadLocation;
-        } else if (dir == "pdf") {
+        } else if (dir.equals("pdf")) {
             location = this.pdfLocation;
         }
-        
+
+        assert location != null;
         return location.resolve(filename);
     }
 

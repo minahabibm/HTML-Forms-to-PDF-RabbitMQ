@@ -1,29 +1,34 @@
 package com.example.simpleformstopdf.jsonPaw;
 
 import java.io.IOException;
+import java.util.Hashtable;
+import java.util.List;
 
 public interface JsonService {
 
-
     void loadAll() throws IOException;
+
+    Hashtable<String, List<PdfProperties>> getFilesList() throws IOException;
 
     void addToFile() throws IOException;
 
-    void addPdfToFile(String taskName, int taskProgress, boolean taskIsReady, String taskUrl ) throws IOException;
+    void addPdfToFile(PdfProperties newTask);
 
-    void getName(String Uid);
+    int getTaskIndex(String Uid);
 
-    void getProgress(String Uid);
+    String getName(String Uid);
 
-    void setProgress(String Uid);
+    int getProgress(String Uid);
 
-    void getState(String Uid);
+    void setProgress(String Uid, int progress);
 
-    void setState(String Uid);
+    boolean getState(String Uid);
 
-    void getDownloadPdF(String Uid);
+    void setState(String Uid, boolean state);
 
-    void setDownloadPdf(String Uid);
+    String getDownloadPdF(String Uid);
+
+    void setDownloadPdf(String Uid, String url);
 
     void deleteFromFile(String Uid) throws IOException;
 

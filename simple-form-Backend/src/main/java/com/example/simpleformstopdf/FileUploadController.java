@@ -27,7 +27,7 @@ public class FileUploadController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file) {
 
         storageService.store(file, "upload");
         logger.info(String.format("File name '%s' uploaded successfully.", file.getOriginalFilename()));
@@ -39,7 +39,7 @@ public class FileUploadController {
     }
 
     @DeleteMapping("/upload/{filename:.+}")
-    public ResponseEntity serveFile(@PathVariable String filename) {
+    public ResponseEntity<?> serveFile(@PathVariable String filename) {
 
         storageService.delete(filename, "upload");
         logger.info(String.format("File name '%s' Deleted.", filename));

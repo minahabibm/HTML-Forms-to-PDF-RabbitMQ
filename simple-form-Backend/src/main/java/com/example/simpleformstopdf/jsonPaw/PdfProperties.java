@@ -2,8 +2,6 @@ package com.example.simpleformstopdf.jsonPaw;
 
 import com.fasterxml.jackson.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 

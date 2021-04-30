@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Formik, Form, useField, useFormikContext } from "formik";
+import { Formik, Form, useField } from "formik";
+import axios from "axios";
+
 
 import './Form.css';
 import Upload from '../upload/Upload';
@@ -21,14 +23,32 @@ const MyTextInput = ({ label, ...props }) => {
 
 const SignupForm = () => {
   const [file, setFile] = useState(null);
+  const [fileStatus, setfileStatus] = useState(false);
 
   const handleCallbackFromUpload = (fileInput) => {
     console.log("Data From Upload");
     setFile(fileInput)
   }
 
+  const handleOnSubmit = async (values, { resetForm, setSubmitting }) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/htmltopdf",
+      data: values
+    }).then(response => {
+      alert(JSON.stringify(values, null, 2));
+      resetForm({});
+      setfileStatus(!fileStatus);
+      setFile(null);
+      setSubmitting(false);
+    }).catch(err => {
+      setSubmitting(false);
+      console.log(err)
+    });
+  };
+
   return (
-    <>
+    <div>
       <h1>Turn a Picture into a PDF!</h1>
       <Formik
         enableReinitialize={true}
@@ -38,51 +58,46 @@ const SignupForm = () => {
           quote: "",
           file: file?.URL ,
         }}
-        onSubmit={ values => {alert(JSON.stringify(values, null, 2));}
-        //   async (values, { setSubmitting }) => {
-        //   await new Promise(r => setTimeout(r, 500));
-        //   setSubmitting(false);
-          
-        // }
-      }
+        onSubmit={handleOnSubmit}
       >
-        <Form >
-          <div className="input">
-            <MyTextInput
-              label="First Name"
-              name="firstName"
-              type="text"
-              placeholder="Jane"
-            />
-            <MyTextInput
-              label="Last Name"
-              name="lastName"
-              type="text"
-              placeholder="Doe"
-            />
-            <MyTextInput
-              label="Quote"
-              name="quote"
-              type="text"
-              placeholder="Hello World"
-            />
-          </div>
+        {({isSubmitting }) => {
+          return (
+            <Form >
+              <div className="input">
+                <MyTextInput
+                  label="First Name"
+                  name="firstName"
+                  type="text"
+                  placeholder="Jane"
+                />
+                <MyTextInput
+                  label="Last Name"
+                  name="lastName"
+                  type="text"
+                  placeholder="Doe"
+                />
+                <MyTextInput
+                  label="Quote"
+                  name="quote"
+                  type="text"
+                  placeholder="Hello World"
+                />
+              </div>
 
-          <div className="fileUpload">
-            <Upload callbackFromUpload = {handleCallbackFromUpload}></Upload>
-          </div>
+              <div className="fileUpload">
+                <Upload fileStatus={fileStatus} callbackFromUpload={handleCallbackFromUpload}></Upload>
+              </div>
 
-          <div>
-            <button type="submit">Submit</button>
-            <span className= "fileName">{file?.name}</span>
-            
-          </div>
+              <div>
+                <button type="submit" disabled={isSubmitting} >Submit</button>
+                <span className= "fileName">{file?.name}</span>
+                
+              </div>
 
-        </Form>
+            </Form>
+          )}}
       </Formik>
-
-
-    </>
+    </div>
   );
 };
 

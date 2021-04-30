@@ -1,19 +1,19 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 
 import './Tasks.css';
 import Item from './Item';
 
 const Tasks = () => {
-    const test = [
-        {"item": "helloworld", "progress": true ,"key": 1}, 
-        {"item": "helloworld", "progress": true , "key": 2}, 
-        {"item": "helloworld", "progress": false , "key": 3}, 
-        {"item": "helloworld", "progress": true , "key": 4},
-        {"item": "helloworld", "progress": true , "key": 5},
-        {"item": "helloworld", "progress": false , "key": 6},
-        {"item": "helloworld", "progress": true , "key": 7},
-    ]
-    const tasksList = test.map((item) =>       
+    const [pdfsArray, setPdfsArray]  = useState([])
+
+    useEffect(()=> {
+        axios.get("http://localhost:8080/pdfs")
+            .then((res) => setPdfsArray(res.data.filesList))
+            .catch((err) => console.log(err))
+    })
+
+    const tasksList = pdfsArray.map((item) =>       
         <Item item={item}></Item>
     );
 

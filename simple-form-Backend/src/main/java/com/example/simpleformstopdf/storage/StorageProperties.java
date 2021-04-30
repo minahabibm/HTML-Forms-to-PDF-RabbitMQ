@@ -9,9 +9,9 @@ public class StorageProperties {
      * Folder location for storing files
      */
     private String location = "storage";
-    private String uploadLocation = "upload-dir";
-    private String pdfLocation = "pdf-dir";
-    private String fileName = "tasks.json";
+    private final String uploadLocation = "upload-dir";
+    private final String pdfLocation = "pdf-dir";
+    private final String fileName = "tasks.json";
 
     public String getLocation() {
         return location;
