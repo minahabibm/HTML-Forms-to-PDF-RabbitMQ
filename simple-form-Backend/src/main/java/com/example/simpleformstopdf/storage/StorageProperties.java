@@ -11,7 +11,7 @@ public class StorageProperties {
     private String location = "storage";
     private final String uploadLocation = "upload-dir";
     private final String pdfLocation = "pdf-dir";
-    private final String fileName = "tasks.json";
+    private final String fileName = "JSON-store.json";
 
     public String getLocation() {
         return location;

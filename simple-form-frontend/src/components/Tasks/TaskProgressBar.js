@@ -1,19 +1,25 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
 import './TaskProgressBar.css';
 
 const Progress = (props) => {
+  const [progress, setProgress] = useState(props.progress)
+  // useEffect(() =>{
+  //   if (progress !== 100) {
+  //     setProgress(100)
+  //   }
+  // });
 
-    return (
+  return (
     <div className="ItemProgress"> 
       <div className="TaskProgressBar">
         <div
           className="TaskProgress"
-          style={{ width: props.progress + '%' }}
+          style={{ width: `${progress}%` }}
         >
-            <div className="TaskName">{props.name}</div>
+            <div className="TaskName">{progress}</div>
         </div>
       </div>
-        <span className="percent"> {props.progress} % </span>
+        <span className="percent"> {progress} % </span>
     </div>
     );
 

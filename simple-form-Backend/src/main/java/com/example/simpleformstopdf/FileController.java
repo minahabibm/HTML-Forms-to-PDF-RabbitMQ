@@ -32,7 +32,7 @@ public class FileController {
 
     @GetMapping("/pdfs")
     public ResponseEntity<?> getFilesList() throws IOException {
-        logger.info(String.format("Tasks List Requested "));
+        logger.info(String.format("List of Tasks Requested "));
         return ResponseEntity.ok(tasksList.getFilesList());
     }
 

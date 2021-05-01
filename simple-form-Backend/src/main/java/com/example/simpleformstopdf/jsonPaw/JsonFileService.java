@@ -52,7 +52,6 @@ public class JsonFileService implements JsonService {
     public void addToFile() {
         try {
             objectMapper.writeValue(tasksLocation.toFile(), tasksList);
-//            tasksList.forEach(System.out::println);
         } catch(Exception ex) {
             ex.printStackTrace();
         }

@@ -54,6 +54,7 @@ const Item = (props) => {
                         <TaskItemProgress 
                             name={props.item.name}  
                             progress= {props.item.progress}
+                            uid = {props.item.uid}
                         ></TaskItemProgress>
                     </div>
                 }

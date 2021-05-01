@@ -37,7 +37,8 @@ const SignupForm = (props) => {
       data: values
     }).then(response => {
       alert(JSON.stringify(values, null, 2));
-      props.callbackFromForm()
+      console.log(response.data.taskID);
+      props.callbackFromForm();
       resetForm({});
       setfileStatus(!fileStatus);
       setFile(null);

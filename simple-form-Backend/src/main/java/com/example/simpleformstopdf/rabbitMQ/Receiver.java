@@ -1,20 +1,18 @@
 package com.example.simpleformstopdf.rabbitMQ;
 
-import java.util.concurrent.CountDownLatch;
-import org.springframework.stereotype.Component;
+import com.example.simpleformstopdf.htmlFormModal.FormProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-@Component
+
+@Service
 public class Receiver {
+    private static final Logger logger = LoggerFactory.getLogger(Receiver.class);
 
-    private CountDownLatch latch = new CountDownLatch(1);
+    public void receiveMessageWTaskForApp1(final FormProperties formData) {
 
-    public void receiveMessage(String message) {
-        System.out.println("Received <" + message + ">");
-        latch.countDown();
+        logger.info("Started a Task with ID: {} from htmlToPDf queue.", formData.getId());
+
     }
-
-    public CountDownLatch getLatch() {
-        return latch;
-    }
-
 }

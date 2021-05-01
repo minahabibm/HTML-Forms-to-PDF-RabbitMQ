@@ -1,11 +1,18 @@
 package com.example.simpleformstopdf.htmlFormModal;
 
-public class FormProperties {
+import java.io.Serializable;
+
+public class FormProperties implements Serializable {
+
     private String id;
     private String firstName;
     private String lastName;
     private String quote;
     private String file;
+
+    // Default constructor is needed to de-serialize JSON
+    public FormProperties() {
+    }
 
     public FormProperties(String id, String firstName, String lastName, String quote, String file) {
         this.id = id;
