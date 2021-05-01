@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik, Form, useField } from "formik";
+import { Formik, Form, useField, Field } from "formik";
 import axios from "axios";
 
 
@@ -21,22 +21,23 @@ const MyTextInput = ({ label, ...props }) => {
   );
 };
 
-const SignupForm = () => {
+const SignupForm = (props) => {
   const [file, setFile] = useState(null);
   const [fileStatus, setfileStatus] = useState(false);
-
+  
   const handleCallbackFromUpload = (fileInput) => {
     console.log("Data From Upload");
     setFile(fileInput)
   }
 
-  const handleOnSubmit = async (values, { resetForm, setSubmitting }) => {
+  const handleOnSubmit = async (values, {resetForm, setSubmitting}) => {
     axios({
       method: "POST",
       url: "http://localhost:8080/htmltopdf",
       data: values
     }).then(response => {
       alert(JSON.stringify(values, null, 2));
+      props.callbackFromForm()
       resetForm({});
       setfileStatus(!fileStatus);
       setFile(null);
@@ -56,11 +57,11 @@ const SignupForm = () => {
           firstName: "",
           lastName: "",
           quote: "",
-          file: file?.URL ,
+          file: "",
         }}
         onSubmit={handleOnSubmit}
       >
-        {({isSubmitting }) => {
+        {({ values, errors, touched, handleSubmit, setFieldValue , isSubmitting }) => {
           return (
             <Form >
               <div className="input">
@@ -85,11 +86,18 @@ const SignupForm = () => {
               </div>
 
               <div className="fileUpload">
+                <Field type="hidden" name="file" value={file?.name} />
                 <Upload fileStatus={fileStatus} callbackFromUpload={handleCallbackFromUpload}></Upload>
               </div>
 
               <div>
-                <button type="submit" disabled={isSubmitting} >Submit</button>
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  onClick={() => { file?.URL && setFieldValue("file", `${file?.name}`) }}
+                >
+                  Submit
+                </button>
                 <span className= "fileName">{file?.name}</span>
                 
               </div>

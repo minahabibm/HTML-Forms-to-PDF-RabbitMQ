@@ -32,6 +32,7 @@ public class FileController {
 
     @GetMapping("/pdfs")
     public ResponseEntity<?> getFilesList() throws IOException {
+        logger.info(String.format("Tasks List Requested "));
         return ResponseEntity.ok(tasksList.getFilesList());
     }
 
@@ -40,6 +41,7 @@ public class FileController {
     public ResponseEntity<Resource> serveFile(@PathVariable String UID) {
 
         Resource file = storageService.loadAsResource(UID + ".pdf", "pdf");
+        logger.info(String.format("File name '%s' Downloaded.", UID));
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
                 .body(file);

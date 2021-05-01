@@ -25,6 +25,11 @@
     text-align: center;
 }
 
+.TaskName {
+    margin-top: 0.2em;
+    margin-left: 0.5em;
+}
+
 @media (prefers-color-scheme: dark) {
     .TaskProgressBar {
         background-color: rgb(183, 155, 229);

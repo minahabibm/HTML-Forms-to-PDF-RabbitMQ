@@ -10,7 +10,7 @@ const Progress = (props) => {
           className="TaskProgress"
           style={{ width: props.progress + '%' }}
         >
-            {props.name}
+            <div className="TaskName">{props.name}</div>
         </div>
       </div>
         <span className="percent"> {props.progress} % </span>

@@ -32,12 +32,14 @@ public class htmlToPDF {
         htmlToPdf.setId(newTask.getUuid().toString());
         tasksList.addPdfToFile(newTask);
         System.out.println( htmlToPdf.getFirstName()+"\n" + htmlToPdf.getLastName()+"\n" + htmlToPdf.getQuote()+"\n" + htmlToPdf.getFile()+"\n" + htmlToPdf.getId());
-
+        logger.info(String.format("Html to Pdf task"));
         return ResponseEntity.ok().build();
+
     }
 
     @GetMapping("/progress/{UID}")
     public ResponseEntity<?> getTaskProgress(@PathVariable String UID) {
+        logger.info(String.format("File Progress '%s' requested.", UID));
         return ResponseEntity.ok(tasksList.getProgress(UID));
     }
 

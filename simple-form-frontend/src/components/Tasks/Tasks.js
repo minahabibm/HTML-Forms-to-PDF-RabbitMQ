@@ -4,14 +4,14 @@ import axios from "axios";
 import './Tasks.css';
 import Item from './Item';
 
-const Tasks = () => {
+const Tasks = (props) => {
     const [pdfsArray, setPdfsArray]  = useState([])
 
     useEffect(()=> {
         axios.get("http://localhost:8080/pdfs")
             .then((res) => setPdfsArray(res.data.filesList))
             .catch((err) => console.log(err))
-    })
+    }, [props.updateTasks])
 
     const tasksList = pdfsArray.map((item) =>       
         <Item item={item}></Item>

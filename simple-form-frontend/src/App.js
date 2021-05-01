@@ -1,14 +1,20 @@
-import './App.css';
+import React, {useState} from "react";
 import Form from './components/Form/Form';
 import Tasks from './components/Tasks/Tasks';
 
-// TODO Add a call back to to form to reload tasks.
+import './App.css';
+// TODO Form Checks before submission
 
 function App() {
+  const [updateTask, setUpdateTasks] = useState(false);
+  const handleCallbackFromForm = () => {
+    setUpdateTasks(!updateTask);
+  }
+
   return (
     <div className="App">
-      <Form></Form>
-      <Tasks></Tasks>
+      <Form callbackFromForm={handleCallbackFromForm}></Form>
+      <Tasks updateTasks={updateTask} ></Tasks>
     </div>
   );
 }
