@@ -1,13 +1,25 @@
 import React, {useState, useEffect} from 'react';
+import axios from "axios";
+
 import './TaskProgressBar.css';
 
 const Progress = (props) => {
-  const [progress, setProgress] = useState(props.progress)
-  // useEffect(() =>{
-  //   if (progress !== 100) {
-  //     setProgress(100)
-  //   }
-  // });
+
+  const [progress, setProgress] = useState(props.progress);
+  const [stateFile, setStateFile] = useState(false);
+  const [updateProgress, setUpdateProgress] = useState(false);
+  
+  useEffect(() => {
+    if (!stateFile && progress < 100) {
+      console.log("state");
+      axios.get(`http://localhost:8080/progress/${props.uid}`)
+        .then((res) => {
+          setProgress(res.data.taskProgress)
+          setStateFile(res.data.taskStatus)
+          setUpdateProgress(!updateProgress)
+        }).catch((err) => console.log(err))
+    }
+  });
 
   return (
     <div className="ItemProgress"> 
@@ -16,12 +28,12 @@ const Progress = (props) => {
           className="TaskProgress"
           style={{ width: `${progress}%` }}
         >
-            <div className="TaskName">{progress}</div>
+            <div className="TaskName">{props.name}</div>
         </div>
       </div>
         <span className="percent"> {progress} % </span>
     </div>
-    );
+  );
 
 };
 

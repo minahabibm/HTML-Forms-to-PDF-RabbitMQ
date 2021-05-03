@@ -36,8 +36,6 @@ const SignupForm = (props) => {
       url: "http://localhost:8080/htmltopdf",
       data: values
     }).then(response => {
-      alert(JSON.stringify(values, null, 2));
-      console.log(response.data.taskID);
       props.callbackFromForm();
       resetForm({});
       setfileStatus(!fileStatus);
@@ -67,13 +65,13 @@ const SignupForm = (props) => {
             <Form >
               <div className="input">
                 <MyTextInput
-                  label="First Name"
+                  label="Name"
                   name="firstName"
                   type="text"
                   placeholder="Jane"
                 />
                 <MyTextInput
-                  label="Last Name"
+                  label="Title"
                   name="lastName"
                   type="text"
                   placeholder="Doe"

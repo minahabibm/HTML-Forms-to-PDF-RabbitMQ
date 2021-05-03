@@ -3,6 +3,7 @@ package com.example.simpleformstopdf.jsonPaw;
 import com.example.simpleformstopdf.storage.StorageProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
+@Service
 public class JsonFileService implements JsonService {
 
     private final StorageProperties properties;

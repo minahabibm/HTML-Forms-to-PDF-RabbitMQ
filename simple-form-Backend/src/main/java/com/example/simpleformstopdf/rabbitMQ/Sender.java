@@ -1,6 +1,7 @@
 package com.example.simpleformstopdf.rabbitMQ;
 
 import com.example.simpleformstopdf.htmlFormModal.FormProperties;
+import com.example.simpleformstopdf.jsonPaw.JsonFileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -13,6 +14,9 @@ public class Sender {
     private static final Logger logger = LoggerFactory.getLogger(Sender.class);
 
     @Autowired
+    private JsonFileService tasksList;
+
+    @Autowired
     private AmqpTemplate rabbitTemplate;
 
     @Autowired
@@ -21,6 +25,7 @@ public class Sender {
     public void sendMessageWTask(final FormProperties data) {
         logger.info("Sending message with task to the queue using routingKey {}. Message= {}", rabbitMQConfigReader.getHtmlToPdfRoutingKey(), data);
         rabbitTemplate.convertAndSend(rabbitMQConfigReader.getHtmlToPdfExchange(), rabbitMQConfigReader.getHtmlToPdfRoutingKey(), data);
+        tasksList.setProgress(data.getId(), 10);
         logger.info("The message with task has been sent to the queue.");
     }
 

@@ -18,14 +18,12 @@ import java.util.Map;
 
 @Controller
 @CrossOrigin("*")
-public class htmlToPDF {
+public class htmlToPdfController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
-    private final JsonFileService tasksList;
 
-    public htmlToPDF() {
-        this.tasksList = new JsonFileService();
-    }
+    @Autowired
+    private JsonFileService tasksList;
 
     @Autowired
     Sender rabbitMQSender;
@@ -42,15 +40,21 @@ public class htmlToPDF {
 
 //        Map<String, Object> response = new HashMap<>();
 //        response.put("taskID", htmlToPdf.getId());
-        
+
         return ResponseEntity.ok().build();
 
     }
 
     @GetMapping("/progress/{UID}")
     public ResponseEntity<?> getTaskProgress(@PathVariable String UID) {
+
         logger.info(String.format("File Progress '%s' requested.", UID));
-        return ResponseEntity.ok(tasksList.getProgress(UID));
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("taskProgress", tasksList.getProgress(UID));
+        response.put("taskStatus", tasksList.getState(UID));
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/test")

@@ -18,14 +18,14 @@ import java.io.IOException;
 
 @Controller
 @CrossOrigin("*")
-public class FileController {
+public class PdfFileController {
 
     private final StorageService storageService;
     private final JsonFileService tasksList ;
     private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 
     @Autowired
-    public FileController(StorageService storageService) {
+    public PdfFileController(StorageService storageService) {
         this.storageService = storageService;
         this.tasksList = new JsonFileService();
     }

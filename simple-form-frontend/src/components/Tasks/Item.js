@@ -19,7 +19,7 @@ const Item = (props) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', `${props.item.name}.jpg`);
+                link.setAttribute('download', `${props.item.name}.pdf`);
                 document.body.appendChild(link);
                 link.click();
               });
@@ -43,6 +43,7 @@ const Item = (props) => {
 
   return (
     <li key= {props.item.uuid}>
+        {/* {console.log(props.item.progress)} */}
         <div className="itemDiv">
             <div className="itemprogress">
                 {props.item.isReady ? 
@@ -54,7 +55,7 @@ const Item = (props) => {
                         <TaskItemProgress 
                             name={props.item.name}  
                             progress= {props.item.progress}
-                            uid = {props.item.uid}
+                            uid = {props.item.uuid}
                         ></TaskItemProgress>
                     </div>
                 }

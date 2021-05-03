@@ -12,7 +12,8 @@ import com.example.simpleformstopdf.storage.StorageService;
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 public class SimpleformstopdfApplication {
-
+    // TODO set a time between each task
+    // TODO set the title and name.
     public static void main(String[] args) {
         SpringApplication.run(SimpleformstopdfApplication.class, args);
     }
