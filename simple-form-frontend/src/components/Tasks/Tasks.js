@@ -6,15 +6,20 @@ import Item from './Item';
 
 const Tasks = (props) => {
     const [pdfsArray, setPdfsArray]  = useState([])
+    const [updateTasks, setUpdateTasks] = useState(false);
+
+    const handleCallbackFromTask = () => {
+        setUpdateTasks(!updateTasks);
+    }
 
     useEffect(()=> {
         axios.get("http://localhost:8080/pdfs")
-            .then((res) => setPdfsArray(res.data.filesList))
+            .then((res) => {setPdfsArray(res.data.filesList)})
             .catch((err) => console.log(err))
-    }, [props.updateTasks])
+    }, [props.updateTasks, updateTasks])
 
     const tasksList = pdfsArray.map((item) =>       
-        <Item item={item}></Item>
+        <Item item={item} updatetasks={handleCallbackFromTask}></Item>
     );
 
   return (

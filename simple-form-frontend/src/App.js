@@ -4,8 +4,6 @@ import Tasks from './components/Tasks/Tasks';
 
 import './App.css';
 
-// TODO Form Checks before submission
-// TODO update UI with callbacks for delete, and completed tasks.
 
 function App() {
   const [updateTask, setUpdateTasks] = useState(false);

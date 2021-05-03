@@ -77,6 +77,9 @@ public class HtmlToPDF {
         tasksList.setProgress(pdfFile, 95);
         Thread.sleep(1000);
 
+        tasksList.setProgress(pdfFile, 99);
+        Thread.sleep(1000);
+
         //Close document
         document.close();
         tasksList.setProgress(pdfFile, 100);

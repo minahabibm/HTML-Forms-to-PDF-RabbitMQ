@@ -21,6 +21,8 @@ const Progress = (props) => {
             setUpdateProgress(!updateProgress)
         }).catch((err) => console.log(err))
       }, 500);
+    } else if(stateFile || progress  === 100 ) {
+      props.updatetasks();
     }
 
   });

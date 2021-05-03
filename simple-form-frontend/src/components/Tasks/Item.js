@@ -9,6 +9,10 @@ const Item = (props) => {
     const [downloadClicked, setsetDownloadClicked]  = useState(false)
     const [deleteClicked, setDeleteClicked]  = useState(false)
 
+    const handleCallbackFromProgress = () => {
+        props.updatetasks()
+    }
+
     useEffect(() => {
         if (downloadClicked ) {
             axios({
@@ -29,7 +33,9 @@ const Item = (props) => {
 
     useEffect(() => {
         if (deleteClicked) {
-            axios.delete(`http://localhost:8080/pdfs/${props.item.uuid}`).catch((err) => console.log(err))
+            axios.delete(`http://localhost:8080/pdfs/${props.item.uuid}`)
+            .then(() => props.updatetasks())
+            .catch((err) => console.log(err))
             setDeleteClicked(false)
         }
       })
@@ -38,12 +44,11 @@ const Item = (props) => {
         setsetDownloadClicked(true)
     }
     const deleteFile = () => {
-        setDeleteClicked(true)
+        setDeleteClicked(true);
     }
 
   return (
     <li key= {props.item.uuid}>
-        {/* {console.log(props.item.progress)} */}
         <div className="itemDiv">
             <div className="itemprogress">
                 {props.item.isReady ? 
@@ -56,6 +61,7 @@ const Item = (props) => {
                             name={props.item.name}  
                             progress= {props.item.progress}
                             uid = {props.item.uuid}
+                            updatetasks={handleCallbackFromProgress}
                         ></TaskItemProgress>
                     </div>
                 }
@@ -70,7 +76,7 @@ const Item = (props) => {
                         >Download</button>
                         <button 
                             className="buttonTasks"
-                            onClick={() => deleteFile()}
+                            onClick={() => window.confirm(`Are you sure you wish to delete ${props.item.name}?`) && deleteFile()}
                         >Delete</button>
                     </>
                 }

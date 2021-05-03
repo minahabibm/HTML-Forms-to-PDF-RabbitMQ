@@ -21,6 +21,7 @@ const MyTextInput = ({ label, ...props }) => {
   );
 };
 
+
 const SignupForm = (props) => {
   const [file, setFile] = useState(null);
   const [fileStatus, setfileStatus] = useState(false);
@@ -29,6 +30,21 @@ const SignupForm = (props) => {
     console.log("Data From Upload");
     setFile(fileInput)
   }
+  
+  const validation = values => {
+    const errors = {};
+    if (!values.name) {
+      errors.name = 'Required';
+    } 
+    if (!values.title) {
+      errors.title = 'Required';
+    } 
+    if (!values.quote) {
+      errors.quote = 'Required';
+    } 
+    return errors;
+  };
+
 
   const handleOnSubmit = async (values, {resetForm, setSubmitting}) => {
     axios({
@@ -58,6 +74,7 @@ const SignupForm = (props) => {
           quote: "",
           file: "",
         }}
+        validate= {values => validation(values)}
         onSubmit={handleOnSubmit}
       >
         {({ values, errors, touched, handleSubmit, setFieldValue , isSubmitting }) => {
@@ -74,13 +91,13 @@ const SignupForm = (props) => {
                   label="Title"
                   name="title"
                   type="text"
-                  placeholder="Doe"
+                  placeholder="#Caption this!"
                 />
                 <MyTextInput
                   label="Quote"
                   name="quote"
                   type="text"
-                  placeholder="Hello World"
+                  placeholder="Where are the average things manufactured? The satisfactory."
                 />
               </div>
 

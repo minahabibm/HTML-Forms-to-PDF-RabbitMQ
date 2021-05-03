@@ -30,7 +30,7 @@ public class htmlToPdfController {
     @PostMapping("/htmltopdf")
     public ResponseEntity<?> postBody(@RequestBody FormProperties htmlToPdf) {
 
-        PdfProperties newTask = new PdfProperties(htmlToPdf.getName() + htmlToPdf.getTitle(), 0, false,  htmlToPdf.getFile());
+        PdfProperties newTask = new PdfProperties(htmlToPdf.getTitle(), 0, false,  htmlToPdf.getFile());
         htmlToPdf.setId(newTask.getUuid().toString());
 
         logger.info("Html to Pdf task");

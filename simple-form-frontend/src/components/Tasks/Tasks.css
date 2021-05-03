@@ -15,12 +15,13 @@
 }
 
 .sticky {
-    position: fixed;
+    position: absolute;
     width: 87.4%;
 }
 
 .tasksdiv {
     padding-top: 4.5%;
+    margin-top: 1.75%;
 }
 
 ul {
