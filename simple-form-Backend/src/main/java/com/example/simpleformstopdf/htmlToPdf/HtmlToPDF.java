@@ -9,7 +9,6 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
@@ -32,20 +31,24 @@ public class HtmlToPDF {
         this.imageFile = imageFile;
     }
 
-    public void createPdf() throws IOException {
+    public void createPdf() throws IOException, InterruptedException {
         tasksList.setProgress(pdfFile, 37);
+        Thread.sleep(1000);
 
         //Initialize PDF writer
         PdfWriter writer = new PdfWriter(properties.getPdfLocation()+ "/" + pdfFile + ".pdf");
         tasksList.setProgress(pdfFile, 45);
+        Thread.sleep(1000);
 
         //Initialize PDF document
         PdfDocument pdf = new PdfDocument(writer);
         tasksList.setProgress(pdfFile, 55);
+        Thread.sleep(1000);
 
         // Initialize document
         Document document = new Document(pdf);
         tasksList.setProgress(pdfFile, 66);
+        Thread.sleep(1000);
 
         //Add Content to the document
         // Add image
@@ -53,22 +56,26 @@ public class HtmlToPDF {
             Image img = new Image(ImageDataFactory.create(properties.getUploadLocation() + "/" + imageFile));
             document.add(img);
             tasksList.setProgress(pdfFile, 77);
+            Thread.sleep(1000);
         }
 
         Paragraph docTitle = new Paragraph(this.title).setBold();
         docTitle.setTextAlignment(TextAlignment.CENTER);
         document.add(docTitle);
         tasksList.setProgress(pdfFile, 85);
+        Thread.sleep(1000);
 
         Paragraph docQuote = new Paragraph(this.quote).setItalic();
         docQuote.setTextAlignment(TextAlignment.CENTER);
         document.add(docQuote);
         tasksList.setProgress(pdfFile, 90);
+        Thread.sleep(1000);
 
         Paragraph docName = new Paragraph("Created by: "+ this.name).setFontSize(7);
         docName.setTextAlignment(TextAlignment.CENTER);
         document.add(docName);
         tasksList.setProgress(pdfFile, 95);
+        Thread.sleep(1000);
 
         //Close document
         document.close();

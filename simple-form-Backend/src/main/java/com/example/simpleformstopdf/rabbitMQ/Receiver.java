@@ -21,11 +21,11 @@ public class Receiver {
     public void receiveMessageWTask(final FormProperties formData) {
 
         logger.info("Started a Task with ID: {} from htmlToPDf queue.", formData.getId());
-        HtmlToPDF newPdf = new HtmlToPDF(formData.getId(), formData.getFirstName(), formData.getLastName(), formData.getQuote(), formData.getFile(), tasksList);
+        HtmlToPDF newPdf = new HtmlToPDF(formData.getId(), formData.getName(), formData.getTitle(), formData.getQuote(), formData.getFile(), tasksList);
         tasksList.setProgress(formData.getId(), 25);
         try {
             newPdf.createPdf();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 

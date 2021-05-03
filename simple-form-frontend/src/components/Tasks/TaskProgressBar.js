@@ -8,17 +8,21 @@ const Progress = (props) => {
   const [progress, setProgress] = useState(props.progress);
   const [stateFile, setStateFile] = useState(false);
   const [updateProgress, setUpdateProgress] = useState(false);
-  
-  useEffect(() => {
+
+ 
+  useEffect(async () => {
+
     if (!stateFile && progress < 100) {
-      console.log("state");
-      axios.get(`http://localhost:8080/progress/${props.uid}`)
+      setTimeout(() => {
+        axios.get(`http://localhost:8080/progress/${props.uid}`)
         .then((res) => {
-          setProgress(res.data.taskProgress)
-          setStateFile(res.data.taskStatus)
-          setUpdateProgress(!updateProgress)
+            setProgress(res.data.taskProgress)
+            setStateFile(res.data.taskStatus)
+            setUpdateProgress(!updateProgress)
         }).catch((err) => console.log(err))
+      }, 500);
     }
+
   });
 
   return (

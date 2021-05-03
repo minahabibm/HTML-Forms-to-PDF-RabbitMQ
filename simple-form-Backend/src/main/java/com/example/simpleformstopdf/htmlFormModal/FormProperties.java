@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class FormProperties implements Serializable {
 
     private String id;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String title;
     private String quote;
     private String file;
 
@@ -14,10 +14,10 @@ public class FormProperties implements Serializable {
     public FormProperties() {
     }
 
-    public FormProperties(String id, String firstName, String lastName, String quote, String file) {
+    public FormProperties(String id, String name, String title, String quote, String file) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.title = title;
         this.quote = quote;
         this.file = file;
     }
@@ -29,20 +29,20 @@ public class FormProperties implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getQuote() {

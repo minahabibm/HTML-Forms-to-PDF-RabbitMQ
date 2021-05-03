@@ -53,8 +53,8 @@ const SignupForm = (props) => {
       <Formik
         enableReinitialize={true}
         initialValues={{
-          firstName: "",
-          lastName: "",
+          name: "",
+          title: "",
           quote: "",
           file: "",
         }}
@@ -66,13 +66,13 @@ const SignupForm = (props) => {
               <div className="input">
                 <MyTextInput
                   label="Name"
-                  name="firstName"
+                  name="name"
                   type="text"
                   placeholder="Jane"
                 />
                 <MyTextInput
                   label="Title"
-                  name="lastName"
+                  name="title"
                   type="text"
                   placeholder="Doe"
                 />

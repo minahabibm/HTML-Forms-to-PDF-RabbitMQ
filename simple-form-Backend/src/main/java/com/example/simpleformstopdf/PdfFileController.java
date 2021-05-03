@@ -1,6 +1,8 @@
 package com.example.simpleformstopdf;
 
 import com.example.simpleformstopdf.jsonPaw.JsonFileService;
+import com.example.simpleformstopdf.storage.StorageFileNotFoundException;
+import com.example.simpleformstopdf.storage.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.simpleformstopdf.storage.StorageFileNotFoundException;
-import com.example.simpleformstopdf.storage.StorageService;
-
-import java.io.IOException;
 
 
 @Controller
@@ -31,8 +28,8 @@ public class PdfFileController {
     }
 
     @GetMapping("/pdfs")
-    public ResponseEntity<?> getFilesList() throws IOException {
-        logger.info(String.format("List of Tasks Requested "));
+    public ResponseEntity<?> getFilesList() {
+        logger.info("List of Tasks Requested ");
         return ResponseEntity.ok(tasksList.getFilesList());
     }
 
@@ -48,7 +45,7 @@ public class PdfFileController {
     }
 
     @DeleteMapping("/pdfs/{UID}")
-    public ResponseEntity<?> deleteFile(@PathVariable String UID) throws IOException {
+    public ResponseEntity<?> deleteFile(@PathVariable String UID) {
 
         tasksList.deleteFromFile(UID);
         storageService.delete(UID + ".pdf", "pdf");
