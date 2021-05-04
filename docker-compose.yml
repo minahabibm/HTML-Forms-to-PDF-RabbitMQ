@@ -1,0 +1,38 @@
+version: "3"
+services:
+
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+        container_name: rabbitmq
+        command: rabbitmq-server
+        ports:
+            - 5672:5672
+            - 15672:15672
+        networks:
+            - rabbitmq_net
+
+    simple-form-backend:
+        build: ./simple-form-backend
+        container_name: simple-form-backend
+        ports:
+            - 8080:8080
+        depends_on:
+            - rabbitmq
+        environment:
+            - SPRING_RABBITMQ_HOST=rabbitmq
+        networks:
+            - rabbitmq_net
+    
+    simple-form-frontend:
+        build: ./simple-form-frontend
+        container_name: simple-form-frontend
+        ports:
+            - 3000:3000
+        depends_on:
+            - simple-form-backend
+        networks:
+            - rabbitmq_net    
+
+networks:
+  rabbitmq_net:
+    driver: bridge
