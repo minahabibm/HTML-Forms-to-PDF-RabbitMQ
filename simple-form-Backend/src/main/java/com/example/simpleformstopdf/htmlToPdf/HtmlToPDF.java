@@ -8,6 +8,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 
 import java.io.IOException;
@@ -54,6 +55,7 @@ public class HtmlToPDF {
         // Add image
         if(imageFile.length() > 0) {
             Image img = new Image(ImageDataFactory.create(properties.getUploadLocation() + "/" + imageFile));
+            img.setHorizontalAlignment(HorizontalAlignment.CENTER);
             document.add(img);
             tasksList.setProgress(pdfFile, 77);
             Thread.sleep(1000);
