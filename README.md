@@ -2,7 +2,7 @@
 
 completed the frontend, backend, and the application is ready. project description in progress...
 <p align="center">
-  <img width="90%" height="80%" src="https://drive.google.com/file/d/1ofpTtJjAG9DKNpjA2JgAxkasRkA0OvQ5/view?usp=sharing">
+  <img width="90%" height="80%" src="https://drive.google.com/uc?export=view&id=1ofpTtJjAG9DKNpjA2JgAxkasRkA0OvQ5">
 </p>
 
 ## Technology Stack
